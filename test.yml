@@ -1,0 +1,32 @@
+name: Shared GitHub Action Jobs
+
+on:
+  workflow_call:
+    inputs:
+      # action:
+      #   required: true
+      #   type: string
+      os:
+        required: true
+        type: string
+      python_version:
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ${{ input.os }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Setup Python ${{ input.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ input.python-version }}
+          cache: "pip"
+      - name: Install vjer
+        run: pip install vjer
+      - name: Run ${{ github.job }}
+        run: vjer ${{ github.job }}
+
+# cSpell:ignore vjer
