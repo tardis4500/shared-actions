@@ -9,7 +9,7 @@ on:
       os:
         required: true
         type: string
-      python_version:
+      python-version:
         required: true
         type: string
 
