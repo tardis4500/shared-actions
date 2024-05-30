@@ -15,14 +15,14 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ input.os }}
+    runs-on: ${{ inputs.os }}
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-      - name: Setup Python ${{ input.python-version }}
+      - name: Setup Python ${{ inputs.python-version }}
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ input.python-version }}
+          python-version: ${{ inputs.python-version }}
           cache: "pip"
       - name: Install vjer
         run: pip install vjer
