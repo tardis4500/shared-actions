@@ -12,12 +12,18 @@ on:
       python-version:
         required: true
         type: string
+      use-flit:
+        required: false
+        type: boolean
+        default: false
+      vjer-env:
+        required: false
+        type: string
+        default: development
 
 env:
   ARTIFACTS_DIR: artifacts
   UNIT_TEST_DIR: unit_test_results
-  VJER_ENV: development
-  VJER_USE_FLIT: true
 
 jobs:
   vjer:
@@ -34,6 +40,9 @@ jobs:
         run: pip install vjer
       - name: Run ${{ inputs.action }}
         run: vjer ${{ inputs.action}}
+        env:
+          VJER_USE_FLIT: ${{ inputs.use-flit }}
+          VJER_ENV: ${{ inputs.vjer-env }}
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:

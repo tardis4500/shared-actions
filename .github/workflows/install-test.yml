@@ -19,8 +19,6 @@ on:
 
 env:
   ARTIFACTS_DIR: artifacts
-  VJER_ENV: development
-  VJER_USE_FLIT: true
 
 jobs:
   install-test:
