@@ -25,6 +25,8 @@ jobs:
   install-test:
     runs-on: ${{ inputs.os }}
     steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
       - name: Setup Python ${{ inputs.python-version }}
         uses: actions/setup-python@v4
         with:
