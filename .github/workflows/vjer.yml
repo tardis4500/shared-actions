@@ -1,4 +1,4 @@
-name: Shared GitHub Action Jobs
+name: Shared Vjer Action
 
 on:
   workflow_call:

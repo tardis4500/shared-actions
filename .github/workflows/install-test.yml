@@ -1,4 +1,4 @@
-name: Shared GitHub Action Jobs
+name: Shared Install Test Action
 
 on:
   workflow_call:
@@ -25,8 +25,6 @@ jobs:
   install-test:
     runs-on: ${{ inputs.os }}
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
       - name: Setup Python ${{ inputs.python-version }}
         uses: actions/setup-python@v4
         with:
