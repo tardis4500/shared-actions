@@ -34,7 +34,8 @@ jobs:
         run: pip install vjer
       - name: Run ${{ inputs.action }}
         run: vjer ${{ inputs.action}}
-      - uses: actions/upload-artifact@v4
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACTS_DIR }}
           path: ${{ env.ARTIFACTS_DIR }}

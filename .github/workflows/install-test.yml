@@ -1,0 +1,50 @@
+name: Shared GitHub Action Jobs
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+      python-version:
+        required: true
+        type: string
+      test-action:
+        required: true
+        type: string
+      test-dir:
+        required: false
+        type: string
+        default: .
+
+env:
+  ARTIFACTS_DIR: artifacts
+
+jobs:
+  install-test:
+    runs-on: ${{ inputs.os }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Setup Python ${{ inputs.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ inputs.python-version }}
+          cache: "pip"
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+      - run: |
+          set -eu
+          pip install $ARTIFACTS_DIR/*.whl
+          cd ${{ inputs.test-dir }}
+          ${{ inputs.test-action }}
+        if: inputs.os != 'windows-latest'
+      - run: |
+          $ErrorActionPreference = 'Stop'
+          Set-StrictMode -Version Latest
+          pip install (Get-Item $env:ARTIFACTS_DIR\*.whl); git-stream list
+          Set-Location ${{ inputs.test-dir }}
+          ${{ inputs.test-action }}
+        if: inputs.os == 'windows-latest'
+
+# cSpell:ignore vjer
