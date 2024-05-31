@@ -19,6 +19,7 @@ on:
 
 env:
   ARTIFACTS_DIR: artifacts
+  VJER_ENV: development
 
 jobs:
   install-test:
