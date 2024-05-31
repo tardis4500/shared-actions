@@ -9,13 +9,13 @@ on:
       publish-mode:
         required: true
         type: string
+      run-id:
+        required: true
+        type: number
       python-version:
         required: false
         type: string
         default: "3.11"
-      run_id:
-        required: true
-        type: number
       use-local-vjer:
         required: false
         type: boolean
@@ -44,7 +44,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          run-id: ${{ inputs.run_id }}
+          run-id: ${{ inputs.run-id }}
           github-token: ${{ secrets.ARTIFACT_TOKEN }}
       - name: Install local vjer
         run: pip install $ARTIFACTS_DIR/*.whl
