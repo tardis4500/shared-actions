@@ -3,9 +3,9 @@ name: Shared GitHub Action Jobs
 on:
   workflow_call:
     inputs:
-      # action:
-      #   required: true
-      #   type: string
+      action:
+        required: true
+        type: string
       os:
         required: true
         type: string
@@ -13,8 +13,12 @@ on:
         required: true
         type: string
 
+env:
+  VJER_ENV: development
+  VJER_USE_FLIT: true
+
 jobs:
-  test:
+  vjer:
     runs-on: ${{ inputs.os }}
     steps:
       - name: Checkout source
@@ -26,7 +30,7 @@ jobs:
           cache: "pip"
       - name: Install vjer
         run: pip install vjer
-      - name: Run ${{ github.job }}
-        run: vjer ${{ github.job }}
+      - name: Run ${{ inputs.action }}
+        run: vjer ${{ inputs.action}}
 
 # cSpell:ignore vjer
