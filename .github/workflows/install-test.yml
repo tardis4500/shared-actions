@@ -40,5 +40,3 @@ jobs:
         if: inputs.os == 'windows-latest'
       - name: Test installed module
         run: cd ${{ inputs.test-dir }} && ${{ inputs.test-action }}
-
-# cSpell:ignore vjer

@@ -74,4 +74,4 @@ jobs:
           path: ${{ env.ARTIFACTS_DIR }}
         if: inputs.publish-mode == 'release'
 
-# cSpell:ignore pypa pypi noreply vjer
+# cSpell:ignore pypa noreply

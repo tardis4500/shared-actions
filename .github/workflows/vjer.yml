@@ -49,5 +49,3 @@ jobs:
           name: ${{ env.ARTIFACTS_DIR }}
           path: ${{ env.ARTIFACTS_DIR }}
         if: inputs.action == 'build'
-
-# cSpell:ignore vjer
