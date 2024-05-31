@@ -33,18 +33,13 @@ jobs:
           cache: "pip"
       - name: Download artifacts
         uses: actions/download-artifact@v4
-      - run: |
-          set -eu
-          pip install $ARTIFACTS_DIR/*.whl
-          cd ${{ inputs.test-dir }}
-          ${{ inputs.test-action }}
+      - name: Install Python module for testing
+        run: pip install $ARTIFACTS_DIR/*.whl
         if: inputs.os != 'windows-latest'
-      - run: |
-          $ErrorActionPreference = 'Stop'
-          Set-StrictMode -Version Latest
-          pip install (Get-Item $env:ARTIFACTS_DIR\*.whl); git-stream list
-          Set-Location ${{ inputs.test-dir }}
-          ${{ inputs.test-action }}
+      - name: Install Python module for testing
+        run: pip install (Get-Item $env:ARTIFACTS_DIR\*.whl)
         if: inputs.os == 'windows-latest'
+      - name: Test installed module
+        run: cd ${{ inputs.test-dir }} && ${{ inputs.test-action }}
 
 # cSpell:ignore vjer
