@@ -3,18 +3,15 @@ name: Shared PyPi Publish Action
 on:
   workflow_call:
     inputs:
-      artifact-token:
-        required: true
-        type: string
       environment:
         required: true
         type: string
       publish-mode:
         required: true
         type: string
-      # run-id:
-      #   required: true
-      #   type: string
+      run-id:
+        required: true
+        type: string
       python-version:
         required: false
         type: string
@@ -23,10 +20,6 @@ on:
         required: false
         type: boolean
         default: false
-
-permissions:
-  contents: write
-  id-token: write
 
 env:
   ARTIFACTS_DIR: artifacts
@@ -44,11 +37,11 @@ jobs:
         with:
           python-version: ${{ inputs.python-version }}
           cache: "pip"
-      # - name: Download artifacts
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     run-id: ${{ inputs.run-id }}
-      #     github-token: ${{ inputs.artifact-token }}
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ inputs.run-id }}
+          github-token: ${{ secrets.ARTIFACT_TOKEN }}
       - name: Install local vjer
         run: pip install $ARTIFACTS_DIR/*.whl
         if: inputs.use-local-vjer
