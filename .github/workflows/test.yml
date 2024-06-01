@@ -3,7 +3,7 @@ name: Shared Test Action
 on:
   workflow_call:
     inputs:
-      run-id:
+      shared-action-var:
         required: true
         type: number
 
@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show the variable
-        run: echo ${{ inputs.run-id }}
+        run: echo ${{ inputs.shared-action-var }}
