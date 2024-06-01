@@ -11,7 +11,7 @@ on:
         type: string
       run-id:
         required: true
-        type: number
+        type: string
       python-version:
         required: false
         type: string
