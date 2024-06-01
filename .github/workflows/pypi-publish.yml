@@ -3,6 +3,9 @@ name: Shared PyPi Publish Action
 on:
   workflow_call:
     inputs:
+      artifact-token:
+        required: true
+        type: string
       environment:
         required: true
         type: string
@@ -45,7 +48,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           run-id: ${{ inputs.run-id }}
-          github-token: ${{ secrets.ARTIFACT_TOKEN }}
+          github-token: ${{ inputs.artifact-token }}
       - name: Install local vjer
         run: pip install $ARTIFACTS_DIR/*.whl
         if: inputs.use-local-vjer
