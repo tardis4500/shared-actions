@@ -20,6 +20,10 @@ on:
         required: false
         type: string
         default: development
+      vjer-local:
+        required: false
+        type: boolean
+        default: false
 
 env:
   ARTIFACTS_DIR: artifacts
@@ -38,6 +42,10 @@ jobs:
           cache: "pip"
       - name: Install vjer
         run: pip install vjer
+        if: ${{ ! inputs.vjer-local}}
+      - name: Install local vjer
+        run: pip install .
+        if: inputs.vjer-local
       - name: Run ${{ inputs.action }}
         run: vjer ${{ inputs.action}}
         env:
