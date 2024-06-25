@@ -34,6 +34,8 @@ jobs:
           cache: "pip"
       - name: Download artifacts
         uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.ARTIFACTS_DIR }}
       - name: Install Python module for testing
         run: pip install $ARTIFACTS_DIR/*.whl
         if: inputs.os != 'windows-latest'

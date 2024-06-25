@@ -40,6 +40,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
+          name: ${{ env.ARTIFACTS_DIR }}
           run-id: ${{ inputs.run-id }}
           github-token: ${{ secrets.ARTIFACT_TOKEN }}
       - name: Install local vjer
