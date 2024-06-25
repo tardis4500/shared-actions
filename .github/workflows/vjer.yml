@@ -52,11 +52,11 @@ jobs:
           VJER_USE_FLIT: ${{ inputs.use-flit }}
           VJER_ENV: ${{ inputs.vjer-env }}
       - name: Upload unit test results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2
-        if: inputs.action == 'test' && always()
+        uses: actions/upload-artifact@v4
         with:
-          check_name: ${{ inputs.os }} ${{ inputs.python-version }} Unit Tests
-          files: ${{ env.UNIT_TEST_DIR }}/*.xml
+          name: ${{ env.UNIT_TEST_DIR }}-${{ inputs.os }}-${{ inputs.python-version }}
+          path: ${{ env.UNIT_TEST_DIR }}
+        if: inputs.action == 'test'
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
