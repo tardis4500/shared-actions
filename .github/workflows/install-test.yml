@@ -36,6 +36,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ env.ARTIFACTS_DIR }}
+          path: ${{ env.ARTIFACTS_DIR }}
       - run: |
           ls -lF
           echo $ARTIFACTS_DIR
